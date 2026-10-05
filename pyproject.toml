@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tenergy"
+version = "0.1.0b0"
+description = "Python SDK for the TEnergy TRON energy rental API"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "TEnergy" }]
+keywords = ["tron", "trx", "energy", "energy-rental", "bandwidth", "usdt", "trc20", "sdk"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+    "Framework :: AsyncIO",
+]
+requires-python = ">=3.9"
+dependencies = []
+
+[project.urls]
+Homepage = "https://tenergy.me"
+Documentation = "https://tenergy.me/docs/sdk"
+
+[project.optional-dependencies]
+async = ["httpx>=0.27"]
+test = ["pytest>=7", "mypy>=1.8", "httpx>=0.27"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/tenergy", "README.md", "LICENSE", "pyproject.toml"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tenergy"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+strict = true
+# mypy 2 cannot target 3.9; the CI matrix still runs the tests on 3.9.
+python_version = "3.10"
+files = ["src/tenergy"]
